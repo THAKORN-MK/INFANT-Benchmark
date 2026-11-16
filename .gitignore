@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+data/raw/
+data/interim/
+data/processed/
+data/InfantCry-DBL A Two-Tier Annotated Corpus of Infan/
+runs/
+*.pt
+*.pth
+*.ckpt

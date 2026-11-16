@@ -1,0 +1,37 @@
+{
+  "schema_version": "0.1",
+  "purpose": "Evidence ledger only; not an executable training configuration",
+  "training_enabled": false,
+  "paper": {
+    "title": "Sinc-Mamba-KAN: A Hybrid Learnable-Filter, Selective State-Space, and Kolmogorov-Arnold Network for Interpretable Infant Pre-Cry Classification",
+    "doi": "10.1109/ACCESS.2026.3733522",
+    "dataset_reference_doi": "10.17632/x493z8nmwc.1"
+  },
+  "explicitly_reported": {
+    "audio": {"sample_rate_hz": 16000, "channels": 1, "duration_seconds": 2.0, "samples": 32000, "peak_normalized": true, "feature_fft": 512, "feature_hop": 160},
+    "sinc": {"filters": 64, "kernel_length": 251, "stride": 8, "window": "Hamming", "rectification": "absolute value"},
+    "convolution": {"channels": [64, 96, 128], "kernel_lengths_after_sinc": [5, 5], "max_pool_sizes": [4, 4, 4], "initial_leaky_relu_slope": 0.2},
+    "mamba": {"d_model": 128, "d_state": 16, "expansion": 2, "d_conv": 4},
+    "features": {"reported_count": 213, "scaler": "fit standardization on training fold only", "selection": "mutual information on training fold only", "selected_count": 100, "projection_output": 64},
+    "fusion": {"waveform_embedding": 128, "feature_embedding": 64, "concatenated": 192, "classes": 5},
+    "kan": {"layer_widths": [192, 64, 5], "grid": 5, "order": 3, "reported_basis_count": 8, "dropout": 0.3},
+    "training": {"loss": "class-weighted cross-entropy plus second-order polynomial term", "optimizer": "AdamW", "learning_rate": 0.001, "weight_decay": 0.0001, "label_smoothing": 0.05, "gradient_clip": 2.0, "full_capacity_epochs": 80, "batch_size_reported_range": [16, 32], "scheduler": "cosine", "cross_validation_folds": 5}
+  },
+  "unknown_or_not_fully_specified": {
+    "exact_author_source_code": null,
+    "dataset_identity_and_tier_manifest": null,
+    "verified_infant_ids": null,
+    "exact_213_descriptor_names_order_and_parameters": null,
+    "resampling_implementation_and_version_at_training": null,
+    "crop_and_padding_placement": null,
+    "convolution_and_sinc_padding_and_initialization": null,
+    "exact_kan_basis_implementation_and_parameters": null,
+    "polyloss_epsilon_and_class_weight_normalization": null,
+    "augmentation_probabilities_and_magnitudes": null,
+    "batch_size_used_for_each_reported_main_run": null,
+    "random_seed_value_and_fold_indices": null,
+    "checkpoint_selection_and_validation_policy": null,
+    "pytorch_mamba_and_dependency_versions": null
+  },
+  "reduced_compute_in_paper_not_default": {"mamba_d_state": 8, "mamba_expansion": 1, "epochs": 45}
+}
